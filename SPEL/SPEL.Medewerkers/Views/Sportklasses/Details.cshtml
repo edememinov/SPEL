@@ -1,0 +1,50 @@
+﻿@model SPEL.Domain.Entities.Sportklasse
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Sportklasse</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.sport.naam)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sport.naam)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.naam)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.naam)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.minLeeftijd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.minLeeftijd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.maxLeeftijd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.maxLeeftijd)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

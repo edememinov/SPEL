@@ -1,0 +1,10 @@
+﻿@model SPEL.Domain.Entities.Lid
+
+@{
+    ViewBag.Title = "EmailAdresBestaatAl";
+}
+
+<h2>Het email adres @Model.Email bestaat al</h2>
+@Html.ActionLink("Terug naar het overzicht", "LedenBeheer", "Leden", htmlAttributes: new { @class = "btn btn-default" })
+
+

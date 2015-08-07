@@ -1,0 +1,77 @@
+﻿@model SPEL.Medewerkers.Models.PrintenViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Sportkaarten</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <!-- jQuery UI CSS Reference -->
+    <link href="@Url.Content("~/Content/themes/base/minified/jquery-ui.min.css")" rel="stylesheet" />
+    <!-- Required jQuery and jQuery UI Javascript references -->
+    <script src="@Url.Content("~/Scripts/jquery-1.7.1.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.10.4.min.js")"></script>
+</head>
+<body>
+    <div class="container" style="width : 50%">
+        @if (Model.leden.Count == 0)
+        {
+            <h1>Alle facturen zijn betaald.</h1>
+        }
+        @foreach (var lid in Model.leden)
+        {
+            <div class="jumbotron" style="background-color : bisque">
+                <h1>@lid.Naam</h1>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <h3>Gegevens</h3>
+                        <ul class="list-group">
+                            <li class="list-group-item">Geboortedatum: @lid.GebDatum.Date.ToShortDateString()</li>
+                            <li class="list-group-item">Geslacht: @lid.Geslacht</li>
+                            <li class="list-group-item">Adres: @lid.Adres</li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-6">
+                        <h3>Inschrijvingen</h3>
+                        <ul class="list-group">
+                            @foreach (var inschrijving in Model.inschrijvingen)
+                            {
+                                if (inschrijving.lidId == lid.ID && (inschrijving.datumUitschrijving == null || inschrijving.datumUitschrijving > DateTime.Today))
+                                {
+                                    <li class="list-group-item">Sportklasse : @inschrijving.sportklasse.naam</li>
+                                }
+
+                            }
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-10">
+                        <h3> Factuur</h3>
+                        <ul class="list-group">
+                            @foreach (var factuur in Model.betaling)
+                            {
+                                if (factuur.LidID == lid.ID)
+                                {
+                                    var bedrag = @factuur.Bedrag * 12m;
+                                    <li class="list-group-item">TotaalBedrag Incl. 21% BTW: @bedrag.ToString("N")</li>
+                                    var exBtw = @factuur.Bedrag / 121 * 100 * 12m;
+                                    <li class="list-group-item">TotaalBedrag Excl. 21% BTW: @exBtw.ToString("N") </li>
+                                }
+                            }
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+</body>
+</html>

@@ -1,0 +1,50 @@
+﻿@model SPEL.Domain.Entities.Inschrijving
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Inschrijving</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.lid.Naam)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lid.Naam)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sportklasse.naam)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sportklasse.naam)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.datumInschrijving)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.datumInschrijving)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.datumUitschrijving)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.datumUitschrijving)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

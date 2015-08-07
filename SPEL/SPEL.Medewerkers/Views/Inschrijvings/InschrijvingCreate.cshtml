@@ -1,0 +1,67 @@
+﻿@model SPEL.Medewerkers.Models.InschrijvingViewModel
+
+@{
+    ViewBag.Title = "InschrijvingCreate";
+}
+
+<h2>Inschrijving Toevoegen</h2>
+
+@using (Html.BeginForm()){
+    @Html.AntiForgeryToken();
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.LabelFor(model => model.lid.ID, "LidId",htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.lid.ID, new SelectList(@ViewBag.leden, "ID", "Naam") , null, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.lid.ID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-default">Haal mogelijke inschrijvingen op</button>
+            </div>
+        </div>
+    </div>
+}
+
+@if (Model != null)
+{
+    if (Model.lid != null) { 
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(m => Model.klasses.First().sport.naam)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => Model.klasses.First().naam)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => Model.klasses.First().indeling)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model.klasses)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.sport.naam)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.naam)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.indeling)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Schrijf in", "SchrijfIn", new { id = item.ID, lid = Model.lid.ID })
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+}
+
+

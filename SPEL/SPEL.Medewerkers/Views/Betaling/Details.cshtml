@@ -1,0 +1,73 @@
+﻿@model SPEL.Domain.Entities.Betaling
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Inschrijving</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Lid.Naam)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lid.Naam)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Lid.Pasfoto)
+        </dt>
+
+        <dd>
+            <img class="img-thumbnail" width="150" height="150" src="@Url.Action("GetImage", "Leden",
+               new { Model.Lid.ID })" />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Lid.GebDatum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lid.GebDatum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Lid.Adres)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lid.Adres)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Bedrag)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Bedrag)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BetalingType.BetalingTypeNaam)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BetalingType.BetalingTypeNaam)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Betaald)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Betaald)
+        </dd>
+
+    </dl>
+</div   >
+<p>
+    @Html.ActionLink("Print Factuur", "EenFactuur", new { id = Model.ID}) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

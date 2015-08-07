@@ -1,0 +1,67 @@
+﻿@model SPEL.Medewerkers.Models.PrintenViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Sportkaarten</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <!-- jQuery UI CSS Reference -->
+    <link href="@Url.Content("~/Content/themes/base/minified/jquery-ui.min.css")" rel="stylesheet" />
+    <!-- Required jQuery and jQuery UI Javascript references -->
+    <script src="@Url.Content("~/Scripts/jquery-1.7.1.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.10.4.min.js")"></script>
+</head>
+<body>
+    <div class="container" style="width : 50%">
+        @foreach (var lid in Model.leden)
+        {
+            <div class="jumbotron" style="background-color : bisque">
+                <div class="row">
+                    <div class="col-xs-8">
+                        <h1>@lid.Naam</h1>
+                    </div>
+                    <div class="col-xs-4">
+                        <img class="img-thumbnail" width="150" height="150" src="@Url.Action("GetImage", "Leden", new { lid.ID })" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6">
+                    <h3>Gegevens</h3>
+                    <ul class="list-group">
+                        <li class="list-group-item">Geboortedatum: @lid.GebDatum.Date.ToShortDateString()</li>
+                        <li class="list-group-item">Geslacht: @lid.Geslacht</li>
+                        <li class="list-group-item">Adres: @lid.Adres</li>
+                    </ul>
+                    </div>
+                    <div class="col-xs-6">
+                        <h3>Inschrijvingen</h3>
+                        <ul class="list-group">
+                            @foreach (var inschrijving in Model.inschrijvingen)
+                            {
+                                if (inschrijving.lidId == lid.ID && (inschrijving.datumUitschrijving == null || inschrijving.datumUitschrijving > DateTime.Today))
+                                {
+                                    <li class="list-group-item">@inschrijving.sportklasse.sport.naam @inschrijving.sportklasse.indeling @inschrijving.sportklasse.naam
+                                    @if (inschrijving.datumUitschrijving != null)
+                                    {
+                                        <div>Einddatum: @inschrijving.datumUitschrijving.Value.ToShortDateString() </div>
+                                    }
+                                    </li>
+                                }
+
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+</body>
+</html>

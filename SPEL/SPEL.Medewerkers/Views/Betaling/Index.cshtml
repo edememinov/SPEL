@@ -1,0 +1,61 @@
+﻿@model IEnumerable<SPEL.Domain.Entities.Betaling>
+@{
+    ViewBag.Title = "Betaling";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+    @using (Html.BeginForm())
+{
+       <p>Betaald: @Html.EditorFor(model => model.First().Betaald)</p>
+        <input type="submit" value="Filter" class="btn btn-default" />
+}
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Lid.Naam)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BetalingType.BetalingTypeNaam)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Bedrag)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Betaald)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Lid.Naam)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BetalingType.BetalingTypeNaam)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bedrag)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Betaald)
+            </td>
+            <td>
+                @if (item.Betaald == false) {
+                @Html.ActionLink("Print Factuur", "EenFactuur", new { id = item.ID})
+                }|
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID })
+            </td>
+        </tr>
+    }
+
+</table>
+@Html.ActionLink("Print Alle Facturen Maand", "Factuur", " ", htmlAttributes: new { @class = "btn btn-default" })
+@Html.ActionLink("Print Alle Facturen Kwartaal", "FactuurK", " ", htmlAttributes: new { @class = "btn btn-default" })
+@Html.ActionLink("Print Alle Facturen Jaar", "FactuurJ", " ", htmlAttributes: new { @class = "btn btn-default" })

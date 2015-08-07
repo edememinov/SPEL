@@ -1,0 +1,51 @@
+﻿@model SPEL.Domain.Entities.Lid
+@{
+    ViewBag.Title = "Bewerken";
+}
+
+<h2>Bewerken</h2>
+@Html.ValidationSummary(true)
+
+@using (Html.BeginForm("Bewerken", "Bewerken", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.LabelFor(model => model.Woonplaats, "Woonplaats", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Woonplaats)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Adres, "Adres", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Adres)
+            </div>
+        </div>
+        <div class="form-group">
+            <div style="position:relative;">
+                <label>Pasfoto</label>
+                <a class='btn' href='javascript:;'>
+                    Kies Bestand...
+                    <input type="file" name="Image" size="40" style="position:absolute;z-index:2;top:0;
+                left:0;filter: alpha(opacity=0); opacity:0; background-color:transparent;
+                color:transparent;" onxx="" #upload-file-info").html($(this).val());'>
+                </a>
+                <span class='label label-info' id="upload-file-info"></span>
+            </div>
+        </div>
+        <img class="img-thumbnail" width="150" height="150" src="@Url.Action("GetImage", "Bewerken",
+               new { Model.ID })" />
+    </div>
+
+
+    @Html.HiddenFor(model => model.Email)
+    @Html.HiddenFor(model => model.GebDatum)
+    @Html.HiddenFor(model => model.Geslacht)
+    @Html.HiddenFor(model => model.ID)
+    @Html.HiddenFor(model => model.Naam)
+    @Html.HiddenFor(model => model.Telnr)
+    @Html.HiddenFor(model => model.PassID)
+    <div class="col-md-offset-2 col-md-10">
+        <input type="submit" value="Bewerken" class="btn btn-default" />
+    </div>
+}
